@@ -11,7 +11,14 @@ func hostname(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Fprintf(w, "Serving from %s\n", hostname)
+
+	color := os.Getenv("COLOR")
+
+	if len(color) == 0 {
+		color = "red"
+	}
+
+	fmt.Fprintf(w, "Color: %s - serving from %s\n", color, hostname)
 }
 
 func post(w http.ResponseWriter, req *http.Request) {
