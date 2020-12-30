@@ -40,7 +40,13 @@ func main() {
 	http.HandleFunc("/data", post)
 	http.HandleFunc("/headers", headers)
 
-	fmt.Println("Starting to serve from :8080 ...")
+	port := os.Getenv("PORT")
 
-	http.ListenAndServe(":8080", nil)
+	if len(port) == 0 {
+		port = "8080"
+	}
+
+	fmt.Printf("Starting to serve from :%v ...", port)
+
+	http.ListenAndServe(":" + port, nil)
 }
